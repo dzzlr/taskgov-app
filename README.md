@@ -51,6 +51,11 @@ PORT=4000
 
 Simpan file `.env` dan kembali ke root proyek.
 
+Tambahkan direktori `data` dan buat file `auditFindings.json` yang isinya sebagai berikut:
+```json
+[]
+```
+
 Pindah ke direktori `frontend` dan buat file `.env` untuk menyimpan konfigurasi:
 
 ```sh
