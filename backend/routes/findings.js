@@ -23,6 +23,7 @@ router.post("/", async (req, res) => {
     komitmenTindakLanjut,
     batasAkhirKomitmen,
     status,
+    pic
   } = req.body;
 
   const newFinding = {
@@ -34,6 +35,7 @@ router.post("/", async (req, res) => {
     komitmenTindakLanjut,
     batasAkhirKomitmen,
     status,
+    pic
   };
 
   try {
@@ -70,6 +72,7 @@ router.put("/:id", async (req, res) => {
     komitmenTindakLanjut,
     batasAkhirKomitmen,
     status,
+    pic
   } = req.body;
 
   try {
@@ -77,7 +80,7 @@ router.put("/:id", async (req, res) => {
     const index = data.findIndex((item) => item.id === id);
     if (index === -1) return res.status(404).json({ error: "Finding not found" });
 
-    data[index] = { ...data[index], kategoriAudit, namaTemuan, penyebab, rekomendasi, komitmenTindakLanjut, batasAkhirKomitmen, status };
+    data[index] = { ...data[index], kategoriAudit, namaTemuan, penyebab, rekomendasi, komitmenTindakLanjut, batasAkhirKomitmen, status, pic };
     await writeData(data);
     res.json(data[index]);
   } catch (err) {
