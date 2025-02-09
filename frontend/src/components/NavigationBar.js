@@ -8,7 +8,7 @@ export default function NavigationBar({ className = "", children }) {
   return (
     <>
       <nav className="fixed w-full flex justify-center bg-white border-2 border-b-slate-100  z-50">
-        <div className="flex flex-col lg:flex-row w-full md:w-11/12 lg:w-4/6 px-4 py-2 md:py-3 justify-between bg-white">
+        <div className="flex flex-col lg:flex-row w-full md:w-11/12 lg:w-5/6 px-4 py-2 md:py-3 justify-between bg-white">
           <div className="flex justify-between">
             <Link href="/" className="text-lg md:text-2xl text-black font-semibold">
               TaskGov

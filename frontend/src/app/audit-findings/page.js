@@ -91,29 +91,25 @@ export default function Home() {
     setShowDialog(true);
   }, [auditFindings]);
 
-  // Fungsi untuk edit audit finding
-  const handleEdit = useCallback((id) => {
-    const finding = auditFindings.find((item) => item.id === id);
-    setCurrentFinding(finding);
-    setShowDialog(true);
-  }, [auditFindings]);
-
   // Render component hanya jika user sudah login
   if (!user) return null;
 
   return (
-    <Layout title="Home">
+    <Layout title="Audit Findings">
       <div className="min-h-screen bg-white">
         <div className="flex flex-col justify-center items-center pt-10 md:pt-12 lg:pt-14">
-          <div className="flex flex-col gap-5 lg:gap-10 w-11/12 lg:w-4/6 mt-6 md:px-4 overflow-hidden sm:rounded-lg">
+          <div className="flex flex-col gap-5 lg:gap-10 w-11/12 lg:w-5/6 mt-6 md:px-4 overflow-hidden sm:rounded-lg">
             <div className="justify-start text-black">
               <div className="mb-5 flex flex-row justify-between">
                 <h1 className="text-lg md:text-2xl text-black font-extrabold">Audit Findings</h1>
                 <button
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 ease-in-out"
-                  onClick={() => setShowCreateDialog(true)}
+                  className="flex flex-row gap-2 px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 ease-in-out"
+                onClick={() => setShowCreateDialog(true)}
                 >
-                  Add Finding
+                  <svg className="w-5 h-5 text-white self-center" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                  <div>Add Finding</div>
                 </button>
               </div>
               <div className="flex flex-col gap-4 pb-5">

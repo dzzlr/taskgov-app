@@ -30,7 +30,7 @@ export default function Home(props) {
               <MemberCard name={"Marcha Salsabila Afiani"} position={"Staff IT Governance"} />
               <MemberCard name={"Craig Koljaan"} position={"Staff IT Governance"} />
             </div>
-          </div>
+          </div> 
         </div>
       </Layout>
     </>
