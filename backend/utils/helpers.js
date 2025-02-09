@@ -1,13 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 
-const dataFilePath = path.join(__dirname, "../data/findings.json");
+// const dataFilePath = path.join(__dirname, "../data/findings.json");
 const usersFilePath = path.join(__dirname, "../data/users.json");
 
 // Read JSON file
-const readData = () => {
+const readData = (filePath) => {
   return new Promise((resolve, reject) => {
-    fs.readFile(dataFilePath, "utf8", (err, data) => {
+    fs.readFile(path.join(__dirname, filePath), "utf8", (err, data) => {
       if (err) reject(err);
       resolve(JSON.parse(data || "[]"));
     });
@@ -15,9 +15,9 @@ const readData = () => {
 };
 
 // Write JSON file
-const writeData = (data) => {
+const writeData = (data, filePath) => {
   return new Promise((resolve, reject) => {
-    fs.writeFile(dataFilePath, JSON.stringify(data, null, 2), (err) => {
+    fs.writeFile(path.join(__dirname, filePath), JSON.stringify(data, null, 2), (err) => {
       if (err) reject(err);
       resolve();
     });

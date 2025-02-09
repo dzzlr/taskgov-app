@@ -6,7 +6,7 @@ const router = express.Router();
 // Get All Audit Findings
 router.get("/", async (req, res) => {
   try {
-    const data = await readData("../data/findings.json");
+    const data = await readData("../data/tasks.json");
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: "Failed to read data" });
@@ -16,33 +16,27 @@ router.get("/", async (req, res) => {
 // Create a new Audit Finding
 router.post("/", async (req, res) => {
   const {
-    kategoriAudit,
-    namaTemuan,
-    penyebab,
-    rekomendasi,
-    komitmenTindakLanjut,
-    batasAkhirKomitmen,
+    namaTugas,
+    catatan,
+    tanggal,
     status,
     pic
   } = req.body;
 
-  const newFinding = {
+  const newTask = {
     id: generateRandomId(),
-    kategoriAudit,
-    namaTemuan,
-    penyebab,
-    rekomendasi,
-    komitmenTindakLanjut,
-    batasAkhirKomitmen,
+    namaTugas,
+    catatan,
+    tanggal,
     status,
     pic
   };
 
   try {
-    const data = await readData("../data/findings.json");
-    data.push(newFinding);
-    await writeData(data, "../data/findings.json");
-    res.status(201).json(newFinding);
+    const data = await readData("../data/tasks.json");
+    data.push(newTask);
+    await writeData(data, "../data/tasks.json");
+    res.status(201).json(newTask);
   } catch (err) {
     res.status(500).json({ error: "Failed to create data" });
   }
@@ -52,7 +46,7 @@ router.post("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const data = await readData("../data/findings.json");
+    const data = await readData("../data/tasks.json");
     const finding = data.find((item) => item.id === id);
     if (!finding) return res.status(404).json({ error: "Finding not found" });
     res.json(finding);
@@ -65,23 +59,20 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const {
-    kategoriAudit,
-    namaTemuan,
-    penyebab,
-    rekomendasi,
-    komitmenTindakLanjut,
-    batasAkhirKomitmen,
+    namaTugas,
+    catatan,
+    tanggal,
     status,
     pic
   } = req.body;
 
   try {
-    const data = await readData("../data/findings.json");
+    const data = await readData("../data/tasks.json");
     const index = data.findIndex((item) => item.id === id);
     if (index === -1) return res.status(404).json({ error: "Finding not found" });
 
-    data[index] = { ...data[index], kategoriAudit, namaTemuan, penyebab, rekomendasi, komitmenTindakLanjut, batasAkhirKomitmen, status, pic };
-    await writeData(data, "../data/findings.json");
+    data[index] = { ...data[index], namaTugas, catatan, tanggal, status, pic };
+    await writeData(data, "../data/tasks.json");
     res.json(data[index]);
   } catch (err) {
     res.status(500).json({ error: "Failed to update data" });
@@ -93,11 +84,11 @@ router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const data = await readData("../data/findings.json");
+    const data = await readData("../data/tasks.json");
     const newData = data.filter((item) => item.id !== id);
     if (data.length === newData.length) return res.status(404).json({ error: "Finding not found" });
 
-    await writeData(newData, "../data/findings.json");
+    await writeData(newData, "../data/tasks.json");
     res.json({ message: "Finding deleted successfully" });
   } catch (err) {
     res.status(500).json({ error: "Failed to delete data" });

@@ -31,6 +31,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const findingsRoutes = require("./routes/findings");
+const tasksRoutes = require("./routes/tasks")
 const authRoutes = require("./routes/auth");
 const protectedRoutes = require("./routes/protected");
 
@@ -44,6 +45,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api/findings", findingsRoutes);
+app.use("/api/tasks", tasksRoutes);
 app.use("/api", authRoutes);
 app.use("/api", protectedRoutes);
 
