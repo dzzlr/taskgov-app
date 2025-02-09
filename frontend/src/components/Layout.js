@@ -3,7 +3,7 @@
 import Head from "next/head";
 import NavigationBar from "./NavigationBar";
 import DarkModeToggle from "./DarkModeToogle";
-// import Footer from "./footer";
+import Footer from "./Footer";
 
 import { useState } from "react";
 
@@ -27,7 +27,7 @@ export default function Layout(props) {
         {/* </div> */}
       {/* </div> */}
       {/* <Footer/> */}
-      <DarkModeToggle />
+      {/* <DarkModeToggle /> */}
     </>
   );
 }

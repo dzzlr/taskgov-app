@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "./Button";
 import Badge from "./Badge";
 
-const AuditDialog = ({ finding, onClose, onSave, onDelete }) => {
+const FindingDialog = ({ finding, onClose, onSave, onDelete }) => {
   const [formState, setFormState] = useState({
     id: finding.id || "",
     kategoriAudit: finding.kategoriAudit || "",
@@ -11,6 +11,7 @@ const AuditDialog = ({ finding, onClose, onSave, onDelete }) => {
     rekomendasi: finding.rekomendasi || "",
     komitmenTindakLanjut: finding.komitmenTindakLanjut || "",
     batasAkhirKomitmen: finding.batasAkhirKomitmen || "",
+    pic: finding.pic || "",
     status: finding.status || "not yet",
   });
 
@@ -33,6 +34,15 @@ const AuditDialog = ({ finding, onClose, onSave, onDelete }) => {
   const handleDelete = () => {
     onDelete(finding.id);
     onClose();
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("id-ID", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric"
+    });
   };
 
   return (
@@ -79,7 +89,7 @@ const AuditDialog = ({ finding, onClose, onSave, onDelete }) => {
           <div className="flex flex-row w-full md:w-1/3 gap-10 md:gap-6">
             <div className="flex flex-col">
               <div className="font-bold">Tenggat Pemenuhan</div>
-              {!isEdit && (<div className="">{formState.batasAkhirKomitmen}</div>)}
+              {!isEdit && (<div className="">{formatDate(formState.batasAkhirKomitmen)}</div>)}
               {isEdit && (
                 <input
                   type="date"
@@ -114,7 +124,7 @@ const AuditDialog = ({ finding, onClose, onSave, onDelete }) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row justify-between gap-2 text-sm">
+        <div className="flex flex-col md:flex-row justify-between gap-2 text-sm mb-3">
           <div className="flex flex-col w-full md:w-1/3">
             <div className="font-bold">Penyebab</div>
             {!isEdit && (<div className="">{formState.penyebab}</div>)}
@@ -158,6 +168,19 @@ const AuditDialog = ({ finding, onClose, onSave, onDelete }) => {
             )}
           </div>
         </div>
+        <div className="flex flex-col w-full md:w-2/3 text-sm">
+          <div className="font-bold">Person in Charge</div>
+          {!isEdit && (<div className="mb-4">{formState.pic}</div>)}
+          {isEdit && (
+            <input
+              name="pic"
+              className="p-2 border rounded mb-4"
+              placeholder="Person in Charge"
+              value={formState.pic}
+              onChange={handleChange}
+            />
+          )}
+        </div>
         <div className="flex justify-end gap-2">
           {isEdit && (
             <>
@@ -197,4 +220,4 @@ const AuditDialog = ({ finding, onClose, onSave, onDelete }) => {
   );
 };
 
-export default AuditDialog;
+export default FindingDialog;

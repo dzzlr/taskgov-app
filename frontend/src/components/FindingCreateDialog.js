@@ -1,16 +1,8 @@
 import React, { useState } from "react";
 import Button from "./Button";
 
-const AuditCreateUpdateDialog = ({ finding, onClose, onSave, onDelete }) => {
+const FindingCreateDialog = ({ finding, onClose, onSave, onDelete }) => {
   const [formState, setFormState] = useState({
-    // id: finding.id || "",
-    // kategoriAudit: finding.kategoriAudit || "",
-    // namaTemuan: finding.namaTemuan || "",
-    // penyebab: finding.penyebab || "",
-    // rekomendasi: finding.rekomendasi || "",
-    // komitmenTindakLanjut: finding.komitmenTindakLanjut || "",
-    // batasAkhirKomitmen: finding.batasAkhirKomitmen || "",
-    // status: finding.status || "not yet",
     id: "",
     kategoriAudit: "",
     namaTemuan: "",
@@ -19,6 +11,7 @@ const AuditCreateUpdateDialog = ({ finding, onClose, onSave, onDelete }) => {
     komitmenTindakLanjut: "",
     batasAkhirKomitmen: "",
     status: "not yet",
+    pic: ""
   });
 
   const handleChange = (e) => {
@@ -129,6 +122,16 @@ const AuditCreateUpdateDialog = ({ finding, onClose, onSave, onDelete }) => {
             />
           </div>
         </div>
+        <div className="flex flex-col w-full md:w-2/3 text-sm">
+          <div className="font-bold">Person in Charge</div>
+          <input
+            name="pic"
+            className="p-2 border rounded mb-4"
+            placeholder="Person in Charge"
+            value={formState.pic}
+            onChange={handleChange}
+          />
+        </div>
         <div className="flex justify-end gap-2">
           <Button
             className="bg-blue-500 text-white rounded hover:bg-blue-600"
@@ -139,93 +142,7 @@ const AuditCreateUpdateDialog = ({ finding, onClose, onSave, onDelete }) => {
         </div>
       </div>
     </div>
-
-    // <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-    //   <div className="bg-white rounded p-6 w-1/2">
-    //     <h3 className="text-lg font-bold mb-4">
-    //       {formState.id ? "Edit Finding" : "Add Finding"}
-    //     </h3>
-    //     <div className="flex flex-row justify-between gap-4">
-    //       <div className="flex flex-col gap-2 w-full">
-    //         <input
-    //           name="kategoriAudit"
-    //           className="w-full p-2 border rounded mb-4"
-    //           placeholder="Kategori Audit"
-    //           value={formState.kategoriAudit}
-    //           onChange={handleChange}
-    //         />
-    //         <input
-    //           name="namaTemuan"
-    //           className="w-full p-2 border rounded mb-4"
-    //           placeholder="Nama Temuan"
-    //           value={formState.namaTemuan}
-    //           onChange={handleChange}
-    //         />
-    //         <textarea
-    //           name="penyebab"
-    //           className="w-full p-2 border rounded mb-4"
-    //           placeholder="Penyebab"
-    //           value={formState.penyebab}
-    //           onChange={handleChange}
-    //         />
-    //         <textarea
-    //           name="rekomendasi"
-    //           className="w-full p-2 border rounded mb-4"
-    //           placeholder="Rekomendasi"
-    //           value={formState.rekomendasi}
-    //           onChange={handleChange}
-    //         />
-    //         <textarea
-    //           name="komitmenTindakLanjut"
-    //           className="w-full p-2 border rounded mb-4"
-    //           placeholder="Komitmen Tindak Lanjut"
-    //           value={formState.komitmenTindakLanjut}
-    //           onChange={handleChange}
-    //         />
-    //       </div>
-    //       <div className="flex flex-col gap-2 w-full">
-    //         <input
-    //           type="date"
-    //           name="batasAkhirKomitmen"
-    //           className="w-full p-2 border rounded mb-4"
-    //           value={formState.batasAkhirKomitmen}
-    //           onChange={handleChange}
-    //         />
-    //         <select
-    //           name="status"
-    //           className="w-full p-2 border rounded mb-4"
-    //           value={formState.status}
-    //           onChange={handleChange}
-    //         >
-    //           <option value="not yet">Not Yet</option>
-    //           <option value="on progress">On Progress</option>
-    //           <option value="done">Done</option>
-    //         </select>
-    //       </div>
-    //     </div>
-    //     <div className="flex justify-end gap-2">
-    //       <Button
-    //         className="bg-blue-500 text-white rounded hover:bg-blue-600"
-    //         onClick={handleSave}
-    //       >
-    //         Save
-    //       </Button>
-    //       <Button
-    //         className="bg-red-500 text-white rounded hover:bg-red-600"
-    //         onClick={handleDelete}
-    //       >
-    //         Delete
-    //       </Button>
-    //       <Button
-    //         className="bg-gray-500 text-white rounded hover:bg-gray-600"
-    //         onClick={onClose}
-    //       >
-    //         Cancel
-    //       </Button>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 
-export default AuditCreateUpdateDialog;
+export default FindingCreateDialog;

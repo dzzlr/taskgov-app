@@ -4,9 +4,9 @@ import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useRouter } from "next/navigation";
 import Layout from "@/components/Layout";
-import AuditDialog from "@/components/AuditDialog";
-import AuditCreateUpdateDialog from "@/components/AuditCreateUpdateDialog";
-import AuditCard from "@/components/AuditCard";
+import FindingCard from "@/components/FindingCard";
+import FindingDialog from "@/components/FindingDialog";
+import FindingCreateDialog from "@/components/FindingCreateDialog";
 
 export default function Home() {
   const { user } = useAuth();
@@ -16,7 +16,6 @@ export default function Home() {
   const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [currentFinding, setCurrentFinding] = useState(null);
-  const [darkMode, setDarkMode] = useState(false);
 
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -99,8 +98,6 @@ export default function Home() {
     setShowDialog(true);
   }, [auditFindings]);
 
-  const toggleDarkMode = () => setDarkMode((prev) => !prev);
-
   // Render component hanya jika user sudah login
   if (!user) return null;
 
@@ -109,7 +106,7 @@ export default function Home() {
       <div className="min-h-screen bg-white">
         <div className="flex flex-col justify-center items-center pt-10 md:pt-12 lg:pt-14">
           <div className="flex flex-col gap-5 lg:gap-10 w-11/12 lg:w-4/6 mt-6 md:px-4 overflow-hidden sm:rounded-lg">
-            <div className={`justify-start ${darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-900"}`}>
+            <div className="justify-start text-black">
               <div className="mb-5 flex flex-row justify-between">
                 <h1 className="text-lg md:text-2xl text-black font-extrabold">Audit Findings</h1>
                 <button
@@ -119,14 +116,14 @@ export default function Home() {
                   Add Finding
                 </button>
               </div>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 pb-5">
                 {auditFindings.map((finding) => (
-                  <AuditCard key={finding.id} finding={finding} onShow={handleShow} />
+                  <FindingCard key={finding.id} finding={finding} onShow={handleShow} />
                 ))}
               </div>
 
               {showDialog && (
-                <AuditDialog
+                <FindingDialog
                   finding={currentFinding}
                   onClose={() => setShowDialog(false)}
                   onSave={handleSave}
@@ -135,7 +132,7 @@ export default function Home() {
               )}
 
               {showCreateDialog && (
-                <AuditCreateUpdateDialog
+                <FindingCreateDialog
                   finding={currentFinding}
                   onClose={() => setShowCreateDialog(false)}
                   onSave={handlePost}
